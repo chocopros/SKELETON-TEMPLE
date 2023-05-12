@@ -20,3 +20,7 @@
 npm init --y
 npm i express uuid sequelize dotenv pg pg-hstore
 npm i -D nodemon
+
+
+# TIME
+- S4-D1-02:05:35
