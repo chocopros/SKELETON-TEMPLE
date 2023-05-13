@@ -15,6 +15,13 @@
 - /users/:id DELETE, PUT
 - /users/me
 
+---
+
+# .env
+
+- info about the DB and variables de entorno
+
+---
 
 # CMD
 npm init --y
