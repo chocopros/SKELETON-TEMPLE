@@ -41,12 +41,13 @@ const Users = db.define('users', {
         }
     },
     password: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING,
         allowNull: false
     },
     status: {
         type: DataTypes.STRING(10),
-        allowNull: false
+        allowNull: false,
+        default: 'Active'
     },
     isValidated: {
         field: 'is_validated',

@@ -25,7 +25,7 @@
 
 # CMD
 npm init --y
-npm i express uuid sequelize dotenv pg pg-hstore
+npm i express uuid sequelize dotenv pg pg-hstore bcrypt
 npm i -D nodemon
 
 
