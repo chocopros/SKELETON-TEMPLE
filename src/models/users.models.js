@@ -21,11 +21,11 @@ const Users = db.define('users', {
     },
     gender: {
         type: DataTypes.STRING(30),
-        allowNull: false
+        allowNull: true
     },
     birthday: {
         type: DataTypes.DATEONLY,
-        allowNull: true
+        allowNull: false
     },
     role: {
         type: DataTypes.STRING(30),
