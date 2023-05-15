@@ -47,12 +47,10 @@ const Users = db.define('users', {
     status: {
         type: DataTypes.STRING(10),
         allowNull: false,
-        default: 'Active'
     },
     isValidated: {
         field: 'is_validated',
         type: DataTypes.BOOLEAN,
-        defaultValue: true,
         allowNull: false   
     }
 

@@ -1,12 +1,15 @@
 const usersControllers = require('./users.controllers')
 
 const createUser = ( req, res ) => {
-    const {firstName,lastName,birthday,email,password} = req.body
+    const {firstName,lastName,birthday,gender,email,password} = req.body
 
-    if (firstName && lastName && gender && birthday && email && password) {
+    if (firstName && lastName && birthday && email && password) {
         usersControllers.createNewUser({firstName,lastName,gender,birthday,email,password})
             .then(r=> {res.status(201).json({r})})
-            .catch( err => res.status(400).json({message: err.message}))
+            .catch( err => res.status(400).json({
+                message: err.message,
+                error: err.errors[0].message
+            }))
     } else {
         res.status(400).json({
             message: `Fail Fields Register`,
@@ -52,7 +55,7 @@ const pathUser = ( req, res ) => {
 const deleteuser =  ( req, res ) => {
     const id = req.params.id
     usersControllers.destroyUser(id)
-        then(r => {
+        .then(r => {
             if(r){
                 res.status(204).json({message: `User With ID: ${id}, >> eliminate succesfully! <<`})
             } else {

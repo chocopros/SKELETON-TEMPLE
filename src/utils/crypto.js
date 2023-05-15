@@ -19,7 +19,5 @@ module.exports = {
 };
 
 //> TEST
-
-
-console.log(hashPassword('contraseña1234'))
-console.log(comparePassword('contraseña1234','$2b$10$4USc3qNeWOE3tM2VzZSqKec4YA27UicnuogFHzZw/NqLjrWf0jihi')) // return true or false
+//console.log(hashPassword('contraseña1234'))
+//console.log(comparePassword('contraseña1234','$2b$10$4USc3qNeWOE3tM2VzZSqKec4YA27UicnuogFHzZw/NqLjrWf0jihi')) // return true or false

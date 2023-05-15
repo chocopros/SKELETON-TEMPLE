@@ -5,6 +5,7 @@ const {hashPassword} = require('../utils/crypto')
 
 
 //> CREATE NEW USERS
+
 const createNewUser = async (data) => {
     const userUUID = uuid.v4()
     const newUser = await Users.create({
@@ -14,10 +15,15 @@ const createNewUser = async (data) => {
         gender: data.gender,
         birthday: data.birthday,
         email: data.email,
-        password: hashPassword(data.password)
+        password: hashPassword(data.password),
+        status: "active",
+        isValidated: true
     })
     return newUser
+    
 };
+
+
 
 //> GET ALL USERS
 const getAllUsers = async () => {
@@ -64,3 +70,18 @@ module.exports = {
 
 // **TEST** //
 
+//> CREATE NEW USERS
+/*
+createNewUser({
+
+    firstName: "Jesus",
+    lastName: "Arechider",
+    birthday: "1993-12-01",
+    email: "jesuschock1993@gmail.com",
+    password: "123456"
+})
+*/
+//>DELETE USER
+/*
+destroyUser('6ae11a17-f00a-465b-b988-f116d49f53b9')
+*/

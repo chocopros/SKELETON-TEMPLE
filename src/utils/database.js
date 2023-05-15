@@ -1,3 +1,5 @@
+//todo con respecto a la conexion
+
 const config = require('../config')
 
 const { Sequelize } = require('sequelize');
@@ -10,4 +12,4 @@ const db = new Sequelize ({
     database: config.db.name
 });
 
-module.exports = db;
+module.exports =  db;

@@ -3,11 +3,24 @@ const express = require('express');
 
 //? Initial Configs
 const app = express();
+const db = require('./utils/database')
+const initModels = require('./models/initModels')
 //> use format JSON
 app.use(express.json());
 
 //> ROUTES
 const useRouter = require('./users/users.router')
+
+//DATABASE AUTH AND SYNC
+db.authenticate()
+    .then(() => console.log('DATABASE AUTHENTIFICATED'))
+    .catch(err => console.log(err))
+
+db.sync()
+    .then(() => console.log('DATA BASE SYNCED!!'))
+    .catch(err => console.log(err))
+
+initModels()
 
 app.get('/', (req, res) => {
     res.status(200).json({
@@ -16,7 +29,9 @@ app.get('/', (req, res) => {
     })
 });
 
-app.use('/api/v1/users');
+
+//> >>>ROUTER USERS<<<
+app.use('/api/v1/users',useRouter);
 
 
 //> SERVER LISTEN
