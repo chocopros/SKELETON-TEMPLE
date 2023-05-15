@@ -27,6 +27,7 @@
 npm init --y
 npm i express uuid sequelize dotenv pg pg-hstore bcrypt
 npm i -D nodemon
+npm i  passport passport-jwt jsonwebtoken
 
 
 # TIME
