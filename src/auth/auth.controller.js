@@ -1,4 +1,5 @@
 //? Dependencies
+const { use } = require('passport');
 const {getUserByEmail} = require('../users/users.controllers')
 const {comparePassword} = require('../utils/crypto')
 //* Email y Contrasena del Usuario
@@ -6,23 +7,34 @@ const {comparePassword} = require('../utils/crypto')
 //? Email is unique in the DB
 
 const loginUser = async (email, pass) => {
-    const data = await getUserByEmail(email)
+    const userEmail = await getUserByEmail(email)
         .then(user => {
             if (user !== null) {
-                console.log(user.dataValues)
-                return true
+                const validation = comparePassword(pass, user.password)
+                if (validation) {
+                    console.log(user.dataValues)
+                    return user
+                } else {
+                    console.log('Password incorrecto')
+                }             
             } else {
-                console.log('NO REGISTERED')
+                console.log(`USER NO REGISTER: ${email}`)
             }
         })
         .catch(err => {
             err => console.log(err)
         })
-
-   
 };
 
-loginUser('jarechider3@jdmgroupcompany.com','root')
+module.exports = {
+    loginUser
+}
+
+
+//? TEST
+/*
+loginUser('jarechider@jdmgroupcompany.com','p4s2W0rd*k3y')
+*/
     
 
 
