@@ -5,5 +5,9 @@
 //* Recovery Password -> modificar la contrasña del usuario
 //* Verify user
 
-const router = require('express')
+const {createUser} = require('../users/users.services')
 
+const router = require('express').Router()
+
+//? /api/v1/auth/register
+router.post('/register', createUser)
