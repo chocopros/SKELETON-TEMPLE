@@ -9,7 +9,7 @@ const config = {
         host: process.env.DB_HOST || '127.0.0.1',
         name: process.env.DB_NAME || 'skeleton',
         username: process.env.DB_USER || 'postgres',
-        password: process.env.DB_PASS || 'jA27511*'
+        password: process.env.DB_PASS || '27511*'
     }
 };
 

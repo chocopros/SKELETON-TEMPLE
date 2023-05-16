@@ -27,14 +27,18 @@ const createUser = ( req, res ) => {
 
 const getAllUsers = ( req, res ) => {
     usersControllers.getAllUsers()
-        .then(r => {res.status(200).json(r)})
+        .then(r => {
+            !r ? res.status(200).json({message: 'NO USERS REGISTERS'}) : res.status(200).json(r)  
+        })
         .catch(err => {res.status(400).json({message: err.message})})
 };
 
 const getUserByID = ( req, res ) => {
     const id = req.params.id
     usersControllers.getUserByID(id)
-        .then(r => {res.status(200).json(r)})
+        .then(r => {
+            r ? res.status(200).json(r) : res.status(200).json({message: 'USER NO FOUND'})
+        })
         .catch(err => {res.status(404).json({message: err.message})})
 };
 
@@ -56,7 +60,8 @@ const deleteuser =  ( req, res ) => {
     const id = req.params.id
     usersControllers.destroyUser(id)
         .then(r => {
-            if(r){
+            
+            if(r==0){
                 res.status(204).json({message: `User With ID: ${id}, >> eliminate succesfully! <<`})
             } else {
                 res.status(400).json({message: `Invalid ID`})

@@ -1,7 +1,8 @@
 //? Dependencies
 const uuid = require('uuid')
 const Users = require('../models/users.models');
-const {hashPassword} = require('../utils/crypto')
+const {hashPassword} = require('../utils/crypto');
+const e = require('express');
 
 
 //> CREATE NEW USERS
@@ -27,7 +28,9 @@ const createNewUser = async (data) => {
 
 //> GET ALL USERS
 const getAllUsers = async () => {
-    const user = await Users.findAll()
+    const user = await Users.findAll({
+        attributes: ['firstName','lastName','email','status']
+    })
     return user
 };
 
@@ -57,7 +60,18 @@ const destroyUser = async(id) => {
         where: {
             id
         }
-    })
+    });
+};
+
+//> GET USER BY EMAIL
+
+const getUserByEmail = async(email) => {
+    return await Users.findOne({
+        attributes: ["email","password"],
+        where: {
+            email: email
+        }
+    });
 };
 
 module.exports = {
@@ -65,7 +79,8 @@ module.exports = {
     getAllUsers,
     getUserByID,
     updateUser,
-    destroyUser
+    destroyUser,
+    getUserByEmail
 }
 
 // **TEST** //

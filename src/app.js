@@ -22,7 +22,10 @@ db.sync()
 
 initModels()
 
-app.get('/', (req, res) => {
+app.get('/', (req, res, next) => {
+    console.log(req.method)
+    next()
+}, (req, res) => {
     res.status(200).json({
         STATUS_SERVER: "OK!!!",
         users: `http://localhost:${port}/api/v1/users`
