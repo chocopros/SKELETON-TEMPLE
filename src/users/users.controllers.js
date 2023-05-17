@@ -18,7 +18,8 @@ const createNewUser = async (data) => {
         email: data.email,
         password: hashPassword(data.password),
         status: "active",
-        isValidated: true
+        isValidated: true,
+        role: "normal"
     })
     return newUser
     
@@ -29,7 +30,7 @@ const createNewUser = async (data) => {
 //> GET ALL USERS
 const getAllUsers = async () => {
     const user = await Users.findAll({
-        attributes: ['firstName','lastName','email','status']
+        attributes: ['id','firstName','lastName','email','status','role']
     })
     return user
 };
@@ -67,7 +68,7 @@ const destroyUser = async(id) => {
 
 const getUserByEmail = async(email) => {
     return await Users.findOne({
-        attributes: ["email","password"],
+        attributes: ["id","email","password","role"],
         where: {
             email: email
         }

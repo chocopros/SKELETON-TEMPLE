@@ -6,6 +6,26 @@ const {comparePassword} = require('../utils/crypto')
 
 //? Email is unique in the DB
 
+const loginUser = async (email,passwordPlain) => {
+    try {
+        const user = await getUserByEmail(email)
+
+        const verifyPassword = comparePassword(passwordPlain, user.password)
+
+        if (verifyPassword) {
+            return user
+        } else {
+           return false 
+        }
+
+    } catch (err) {
+        return err
+    }
+};
+
+
+
+/*
 const loginUser = async (email, pass) => {
     const userEmail = await getUserByEmail(email)
         .then(user => {
@@ -16,16 +36,18 @@ const loginUser = async (email, pass) => {
                     return user
                 } else {
                     console.log('Password incorrecto')
+                    return false
                 }             
             } else {
                 console.log(`USER NO REGISTER: ${email}`)
+                return false
             }
         })
         .catch(err => {
             err => console.log(err)
         })
 };
-
+*/
 module.exports = {
     loginUser
 }
@@ -33,7 +55,7 @@ module.exports = {
 
 //? TEST
 /*
-loginUser('jarechider@jdmgroupcompany.com','p4s2W0rd*k3y')
+loginUser('jarechider@jdmgroupcompany.com','p4s2W0rd*k3y1')
 */
 
 

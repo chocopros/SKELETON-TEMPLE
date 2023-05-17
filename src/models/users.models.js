@@ -53,7 +53,7 @@ const Users = db.define('users', {
         type: DataTypes.BOOLEAN,
         allowNull: false   
     }
-
+   
 });
 
 module.exports = Users

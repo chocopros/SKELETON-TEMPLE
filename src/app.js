@@ -5,14 +5,15 @@ const express = require('express');
 const app = express();
 const db = require('./utils/database')
 const initModels = require('./models/initModels')
+
 //> use format JSON
 app.use(express.json());
 
-//> ROUTES
+//> ROUTES <<
 const useRouter = require('./users/users.router')
 const authRouter = require('./auth/auth.router')
 
-//DATABASE AUTH AND SYNC
+//>> DATABASE AUTH AND SYNC <<
 db.authenticate()
     .then(() => console.log('DATABASE AUTHENTIFICATED'))
     .catch(err => console.log(err))
@@ -29,7 +30,7 @@ app.get('/', (req, res, next) => {
 }, (req, res) => {
     res.status(200).json({
         STATUS_SERVER: "OK!!!",
-        users: `http://localhost:${port}/api/v1/users`
+        users: `http://localhost:${port}/api/v1/users`,
     })
 });
 
