@@ -11,3 +11,5 @@ const router = require('express').Router()
 
 //? /api/v1/auth/register
 router.post('/register', createUser)
+
+module.exports = router

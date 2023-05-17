@@ -35,6 +35,5 @@ module.exports = {
 /*
 loginUser('jarechider@jdmgroupcompany.com','p4s2W0rd*k3y')
 */
-    
 
 

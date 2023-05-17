@@ -10,6 +10,7 @@ app.use(express.json());
 
 //> ROUTES
 const useRouter = require('./users/users.router')
+const authRouter = require('./auth/auth.router')
 
 //DATABASE AUTH AND SYNC
 db.authenticate()
@@ -33,8 +34,9 @@ app.get('/', (req, res, next) => {
 });
 
 
-//> >>>ROUTER USERS<<<
-app.use('/api/v1/users',useRouter);
+//> >>>ROUTER USE<<<
+app.use('/api/v1/users',useRouter); //? users
+app.use('/api/v1/auth', authRouter); //? auth
 
 
 //> SERVER LISTEN
