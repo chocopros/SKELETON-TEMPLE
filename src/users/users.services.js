@@ -70,7 +70,7 @@ const deleteuser =  ( req, res ) => {
         .catch(err => {res.status(400).json({message: err.message})})
 };
 
-//? My user Services
+//>>>> My user Services<<<<<
 const getMyUser = ( req, res ) => {
     const id = req.user.id //? req.user contiene la informacion del token desencriptado
     usersControllers.getUserByID(id)
