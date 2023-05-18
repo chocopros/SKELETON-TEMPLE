@@ -65,7 +65,6 @@ const destroyUser = async(id) => {
 };
 
 //> GET USER BY EMAIL
-
 const getUserByEmail = async(email) => {
     return await Users.findOne({
         attributes: ["id","email","password","role"],
