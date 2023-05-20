@@ -17,7 +17,7 @@ const createNewUser = async (data) => {
         birthday: data.birthday,
         email: data.email,
         password: hashPassword(data.password),
-        status: "active",
+        status: "is_active",
         isValidated: true,
         role: "normal"
     })
@@ -39,7 +39,8 @@ const getAllUsers = async () => {
 const getUserByID = async(id) => {
     const user = await Users.findOne({
         where: {
-            id
+            id,
+            status: 'is_active'
         }
     });
     return user;
@@ -67,9 +68,10 @@ const destroyUser = async(id) => {
 //> GET USER BY EMAIL
 const getUserByEmail = async(email) => {
     const user = await Users.findOne ({
-        attributes: ["id","email","password","role"],
+        attributes: ["id","email","password","role","status"],
         where: {
-            email: email
+            email: email,
+            status: 'is_active'
         }
     });
     if (user !== null) {

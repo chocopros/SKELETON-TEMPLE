@@ -15,17 +15,22 @@ const login = ( req, res) => {
     })
 
     loginUser(email, password)
-        .then(r => {
-            if (r) {
-                const token = jwt.sign({
-                    id: r.id,
-                    email: r.email,
-                    role: r.role
-                },jwtSecret)
-                res.status(200).json({message: "Correct Credentials", token})
+        .then(user => {
+            if(user === 'inactive') {
+                res.status(404).json({message: "USER was deleted or not found!!!"})
             } else {
-                res.status(401).json({message: 'Invalid Crdeentials'})
+                if (user) {
+                    const token = jwt.sign({
+                        id: r.id,
+                        email: r.email,
+                        role: r.role
+                    },jwtSecret)
+                    res.status(200).json({message: "Correct Credentials", token})
+                } else {
+                    res.status(401).json({message: 'Invalid Credentials'})
+                }
             }
+            
         })
         .catch(err => res.status(400).json({message: err}))
 

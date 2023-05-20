@@ -1,6 +1,6 @@
 //? Dependencies
-const {comparePassword} = require('../utils/crypto')
-const {getUserByEmail} = require('../users/users.controllers')
+const {comparePassword} = require('../utils/crypto');
+const {getUserByEmail} = require('../users/users.controllers');
 
 //* Email y Contrasena del Usuario
 //? Email is unique in the DB
@@ -16,13 +16,17 @@ const loginUser = async (email,passwordPlain) => {
         if (user === null) {
             return false
         } else {
-            const verifyPassword = comparePassword(passwordPlain, user.password)
-            if (verifyPassword) {
-                return user
+            if(user.status === "inactive"){
+                return 'inactive';
             } else {
-               return false 
-            }
-        }
+                const verifyPassword = comparePassword(passwordPlain, user.password)
+                if (verifyPassword) {
+                    return user
+                } else {
+                return false;
+                }
+            };
+        };
 
     } catch (err) {
         return err
@@ -38,7 +42,7 @@ module.exports = {
 
 //? TEST
 /*
-loginUser('adm@admin.com','p4s2W0rd*k3y1')
+loginUser('beta@beta.com','p4s2W0rd*k3y')
     .then(r => { console.log(r)})
     .catch(err => { console.log(err)})
 */

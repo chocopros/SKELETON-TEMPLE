@@ -82,15 +82,19 @@ const pathMyUser = ( req, res ) => {
     const id = req.user.id
     const {firstName, lastName, gender, birthday} = req.body
     usersControllers.updateUser(id,{firstName, lastName, gender, birthday})
-        .then(r => res.status(200).json({message: `User With ID: ${id}, >> Edited succesfully! <<`}))
+        .then(() => res.status(200).json({message: `User With ID: ${id}, >> Edited succesfully! <<`}))
         .catch(err => {res.status(400).json({message: err.message})})
 };
 
+//? 2 tipos de delete:
+//* 1. por administrador.
+//* 2. por mi mismo.
+
 const deleteMyUser = ( req, res ) => {
     const id = req.user.id
-    usersControllers.destroyUser(id)
-        .then(r => res.status(204).json({message: `User With ID: ${id}, >> eliminate succesfully! <<`}))
-        .catch(err => {res.status(400).json({message: err.message})})
+    usersControllers.updateUser(id,{status: "inactive"})
+        .then(() => res.status(200).json({message: `User With ID: ${id}, >> User was deleted succesfully! <<`}))
+        .catch(err => {res.status(400).json({message: err})})
 };
 
 module.exports = {
