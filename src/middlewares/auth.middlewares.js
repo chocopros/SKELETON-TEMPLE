@@ -19,7 +19,7 @@ module.exports = (passport) => {
     const options = {
         jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('jwt'), //?ir a los header de la peticion
         secretOrKey: jwtSecret
-    }
+    };
 
     passport.use(
         new JwtStrategy(options, async(decoded, done) => {
@@ -34,7 +34,7 @@ module.exports = (passport) => {
                 return done(null, decoded)
             } catch (error) {
                 return done(null, false)
-            }
+            };
         })
-    )
-}
+    );
+};

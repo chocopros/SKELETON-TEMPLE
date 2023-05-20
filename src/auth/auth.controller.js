@@ -1,28 +1,53 @@
 //? Dependencies
-const { use } = require('passport');
-const {getUserByEmail} = require('../users/users.controllers')
 const {comparePassword} = require('../utils/crypto')
-//* Email y Contrasena del Usuario
+const {getUserByEmail} = require('../users/users.controllers')
 
+//* Email y Contrasena del Usuario
 //? Email is unique in the DB
+
+//> Login USER
+    //! return user if LOGIN OK!!!
+    //! return false if LOGIN it's Fail
 
 const loginUser = async (email,passwordPlain) => {
     try {
         const user = await getUserByEmail(email)
 
-        const verifyPassword = comparePassword(passwordPlain, user.password)
-
-        if (verifyPassword) {
-            return user
+        if (user === null) {
+            return false
         } else {
-           return false 
+            const verifyPassword = comparePassword(passwordPlain, user.password)
+            if (verifyPassword) {
+                return user
+            } else {
+               return false 
+            }
         }
 
     } catch (err) {
         return err
     }
+    
 };
 
+
+module.exports = {
+    loginUser
+}
+
+
+//? TEST
+/*
+loginUser('adm@admin.com','p4s2W0rd*k3y1')
+    .then(r => { console.log(r)})
+    .catch(err => { console.log(err)})
+*/
+
+/*
+    "email": "adm@admin.com",
+    "password": "p4s2W0rd*k3y"
+
+*/
 
 
 /*
@@ -48,14 +73,3 @@ const loginUser = async (email, pass) => {
         })
 };
 */
-module.exports = {
-    loginUser
-}
-
-
-//? TEST
-/*
-loginUser('jarechider@jdmgroupcompany.com','p4s2W0rd*k3y1')
-*/
-
-

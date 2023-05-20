@@ -66,12 +66,17 @@ const destroyUser = async(id) => {
 
 //> GET USER BY EMAIL
 const getUserByEmail = async(email) => {
-    return await Users.findOne({
+    const user = await Users.findOne ({
         attributes: ["id","email","password","role"],
         where: {
             email: email
         }
     });
+    if (user !== null) {
+        return user
+    } else {
+        return null
+    }
 };
 
 module.exports = {
@@ -92,11 +97,18 @@ createNewUser({
     firstName: "Jesus",
     lastName: "Arechider",
     birthday: "1993-12-01",
-    email: "jesuschock1993@gmail.com",
+    email: "jesuschock93@gmail.com",
     password: "123456"
 })
 */
-//>DELETE USER
+//> DELETE USER
 /*
 destroyUser('6ae11a17-f00a-465b-b988-f116d49f53b9')
+*/
+
+//> GET USER FOR EMAIL
+/*
+getUserByEmail('adm@admin')
+    .then(r=> console.log(r))
+    .catch(err=> console.log(err))
 */
