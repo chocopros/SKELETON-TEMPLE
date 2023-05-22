@@ -40,7 +40,6 @@ const getUserByID = async(id) => {
     const user = await Users.findOne({
         where: {
             id,
-            status: 'is_active'
         }
     });
     return user;
@@ -70,8 +69,7 @@ const getUserByEmail = async(email) => {
     const user = await Users.findOne ({
         attributes: ["id","email","password","role","status"],
         where: {
-            email: email,
-            status: 'is_active'
+            email
         }
     });
     if (user !== null) {

@@ -12,7 +12,7 @@ const {getUserByEmail} = require('../users/users.controllers');
 const loginUser = async (email,passwordPlain) => {
     try {
         const user = await getUserByEmail(email)
-
+        //console.log(user)
         if (user === null) {
             return false
         } else {
@@ -46,7 +46,6 @@ loginUser('beta@beta.com','p4s2W0rd*k3y')
     .then(r => { console.log(r)})
     .catch(err => { console.log(err)})
 */
-
 /*
     "email": "adm@admin.com",
     "password": "p4s2W0rd*k3y"
