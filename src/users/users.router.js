@@ -3,6 +3,7 @@ const passport = require('passport')
 
 
 const usersServices = require('./users.services')
+const adminValidate = require('../middlewares/role.middlewares')
 
 require('../middlewares/auth.middlewares')(passport)
 
@@ -19,14 +20,16 @@ router.route('/me')
 
 router.route('/:id')
     .get(usersServices.getUserByID)
-    .patch(usersServices.pathUser)
-    .delete(usersServices.deleteuser)
-
-
-
-
-
-
+    .patch(
+        passport.authenticate('jwt', {session: false}),
+        adminValidate,
+        usersServices.pathUser
+    )
+    .delete(
+        passport.authenticate('jwt', {session: false}),
+        adminValidate,
+        usersServices.deleteuser
+    )
 
 module.exports = router
 

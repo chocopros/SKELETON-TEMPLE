@@ -1,5 +1,6 @@
 //?Dependencies
 const express = require('express');
+const cors = require('cors')
 
 //? Initial Configs
 const app = express();
@@ -8,6 +9,7 @@ const initModels = require('./models/initModels')
 
 //> use format JSON
 app.use(express.json());
+app.use(cors()) // implementara cors en tu servidor
 
 //> ROUTES <<
 const useRouter = require('./users/users.router')
@@ -15,7 +17,7 @@ const authRouter = require('./auth/auth.router')
 
 //>> DATABASE AUTH AND SYNC <<
 db.authenticate()
-    .then(() => console.log('DATABASE AUTHENTIFICATED'))
+    .then(() => console.log('DB AUTHENTIFICATED'))
     .catch(err => console.log(err))
 
 db.sync()
